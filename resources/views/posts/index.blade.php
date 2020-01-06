@@ -14,9 +14,9 @@
         <div class="col col-md-8">
             @foreach ($posts as $post)
             <nav class="panel panel-default">
-                <a href="{{route('posts.show', ['id' => $post->id])}}" class="panel-heading link">{{$post->title}}</a>
+                <a href="{{route('posts.show', ['post' => $post])}}" class="panel-heading link">{{$post->title}}</a>
                 <div class="panel-body">
-                    <p><a href="{{route('users.show', ['id' => $post->user_id])}}">投稿者：{{$post->user->name}}</a></p>
+                    <p><a href="{{route('users.show', ['user' => $post->user])}}">投稿者：{{$post->user->name}}</a></p>
                     {{$post->content}}
                 </div>
             </nav>

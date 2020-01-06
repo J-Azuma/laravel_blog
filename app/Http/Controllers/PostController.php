@@ -20,8 +20,8 @@ class PostController extends Controller
         ]);
     }
 
-    public function show($id) {
-        return view('posts.show', ['post' => Post::findOrFail($id)]);
+    public function show(Post $post) {
+        return view('posts.show', ['post' => $post]);
     }
 
     public function showCreateForm() {
@@ -42,18 +42,30 @@ class PostController extends Controller
         ]);
     }
 
-    public function showEditform($id) {
-        return view('posts.edit', ['post' => Post::findOrFail($id)]);
+    public function showEditform(User $user, Post $post) {
+
+       if ($post->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+        return view('posts.edit', ['post' => $post]);
     }
 
-    public function edit($id, EditPost $request) {
-        $post = Post::find($id);
+    public function edit(User $user, Post $post, EditPost $request) {
 
+        $post = Post::find($post->id);
+        if ($post->user_id !== Auth::user()->id) {
+            abort(403);
+        }
         $post->title = $request->title;
         $post->content = $request->content;
         $post->save();
-        //$posts = Post::all();
-
         return redirect()->route('posts.index');
     }
+
+    public function delete(Post $post) {
+        $post->delete();
+        return redirect()->route('posts.index');
+    }
+
+
 }

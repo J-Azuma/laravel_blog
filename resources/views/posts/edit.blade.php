@@ -14,7 +14,7 @@
                         @endforeach
                     </div>
                     @endif
-                    <form action="{{route('posts.edit', ['id' => $post->id])}}" method="post">
+                    <form action="{{route('posts.edit', ['post' => $post])}}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="title">title</label>

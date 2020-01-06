@@ -10,15 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/posts/create', 'PostController@showCreateForm')->name('posts.create');
-Route::post('/posts/create', 'PostController@create');
-Route::get('/posts/{id}/edit', 'PostController@showEditform')->name('posts.edit');
-Route::post('/posts/{id}/edit', 'PostController@edit');
-});
-Route::get('/posts', 'PostController@index')->name('posts.index');
-Route::get('/posts/{id}','PostController@show')->name('posts.show');
-Route::get('/', 'PostController@index')->name('posts.index');
-Route::get('/users/{id}', 'UserController@show')->name('users.show');
-Auth::routes();
+  Route::get('/posts/create', 'PostController@showCreateForm')->name('posts.create');
+  Route::post('/posts/create', 'PostController@create');
+
+  Route::get('/posts/{post}/edit', 'PostController@showEditform')->name('posts.edit');
+  Route::post('/posts/{post}/edit', 'PostController@edit');
+  Route::post('/posts/{post}/delete', 'PostController@delete')->name('posts.delete');
+  });
+
+/*認証していなくても使える機能一覧*/
+  Route::get('/posts/{post}','PostController@show')->name('posts.show');
+  Route::get('/', 'PostController@index')->name('posts.index');
+  Route::get('/posts', 'PostController@index')->name('posts.index');
+  Route::get('/users/{user}', 'UserController@show')->name('users.show');
+  Auth::routes();

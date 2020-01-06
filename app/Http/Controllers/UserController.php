@@ -7,9 +7,9 @@ use App\User;
 use App\Post;
 class UserController extends Controller
 {
-    public function show(int $id) {
-        $user = User::find($id);
+    public function show(User $user) {
+        $user = User::find($user->id);
         $posts = $user->posts()->orderBy('updated_at', 'desc')->paginate(5);
-        return view('users.show', ['user' => User::findOrFail($id), 'posts' => $posts]);
+        return view('users.show', ['user' => $user, 'posts' => $posts]);
     }
 }

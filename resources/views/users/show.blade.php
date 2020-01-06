@@ -27,7 +27,7 @@
             <h2>all Posts</h2>
             @foreach ($posts as $post)
             <nav class="panel panel-default">
-                <a href="{{route('posts.show', ['id' => $post->id])}}" class="panel-heading link">{{$post->title}}:
+                <a href="{{route('posts.show', ['post' => $post])}}" class="panel-heading link">{{$post->title}}:
                     {{$post->created_at}}</a>
                 <div class="panel-body">
                     {{$post->content}}

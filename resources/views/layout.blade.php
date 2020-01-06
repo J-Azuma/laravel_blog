@@ -15,7 +15,7 @@
             <a href="/" class="navbar-brand">Blog</a>
             <div class="my-navbar-control navbar-right">
                 @if (Auth::check())
-                <a href="{{route('users.show', ['id' => Auth::user()->id])}}" class="my-navbar-item">My Page</a>
+                <a href="{{route('users.show', ['user' => Auth::user()])}}" class="my-navbar-item">My Page</a>
                 |
                 <a href="#" id="logout" class="my-navbar-item">logout</a>
                 <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
